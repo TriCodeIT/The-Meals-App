@@ -1,14 +1,16 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { createStackNavigator } from "react-navigation-stack";
+import { createAppContainer } from "react-navigation";
 
-const MealsNavigator = (props) => {
-  return (
-    <View>
-      <Text>Meals Navigator</Text>
-    </View>
-  );
-};
+import CategoriesScreen from '../screens/CategoriesScreen';
+import CategoryMealsScreen from '../screens/CategoryMealsScreen';
+import MealDetailScreen from '../screens/MealDetailScreen';
 
-const styles = StyleSheet.create({});
+const MealsNavigator = createStackNavigator({
+  Categories: CategoriesScreen,
+  CategoryMeals: {
+    screen: CategoryMealsScreen
+  },
+  MealDetail: MealDetailScreen
+});
 
-export default MealsNavigator;
+export default createAppContainer(MealsNavigator)
