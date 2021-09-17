@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, FlatList } from "react-native";
 import { CATEGORIES, MEALS } from "../data/dummy-data";
 import MealItem from "../components/MealItem";
 
-const CategoryMealsScreen = props => {
+const CategoryMealsScreen = (props) => {
   const renderMealItem = (itemData) => {
     return (
       <MealItem
@@ -13,7 +13,12 @@ const CategoryMealsScreen = props => {
         duration={itemData.item.duration}
         complexity={itemData.item.complexity}
         affordability={itemData.item.affordability}
-        onSelectMeal={() => {}}
+        onSelectMeal={() => {
+          props.navigation.navigate({
+            routeName: "MealDetail",
+            params: { mealId: itemData.item.id },
+          });
+        }}
       />
     );
   };
@@ -36,7 +41,7 @@ const CategoryMealsScreen = props => {
   );
 };
 
-CategoryMealsScreen.navigationOptions = navigationData => {
+CategoryMealsScreen.navigationOptions = (navigationData) => {
   const catId = navigationData.navigation.getParam("categoryId");
 
   const selectedCategory = CATEGORIES.find((cat) => cat.id === catId);
